@@ -1,56 +1,56 @@
 {
-  "id": "procent-activities",
-  "title": "Procent Activities",
-  "description": "A Foundry VTT module for applying percentage-based damage or healing, compatible with D&D 5e, Midi QOL, and Dynamic Active Effects. Adds a GUI for configuring percentage effects on items.",
-  "version": "1.0.4",
-  "compatibility": {
-    "minimum": "12",
-    "verified": "12.331"
-  },
-  "relationships": {
-    "systems": [
-      {
-        "id": "dnd5e",
-        "type": "system",
-        "compatibility": {
-          "minimum": "4.2.0",
-          "verified": "4.2.2"
-        }
-      }
+    "id": "procent-activities",
+    "title": "Procent Activities",
+    "description": "A Foundry VTT module for applying percentage-based damage or healing, compatible with D&D 5e, Midi QOL, and Dynamic Active Effects. Adds a GUI for configuring percentage effects on items.",
+    "version": "1.0.5",
+    "compatibility": {
+        "minimum": "12",
+        "verified": "12.331"
+    },
+    "relationships": {
+        "systems": [
+            {
+                "id": "dnd5e",
+                "type": "system",
+                "compatibility": {
+                    "minimum": "4.2.0",
+                    "verified": "4.2.2"
+                }
+            }
+        ],
+        "requires": [
+            {
+                "id": "midi-qol",
+                "type": "module",
+                "compatibility": {
+                    "minimum": "12.4.27",
+                    "verified": "12.4.43"
+                }
+            },
+            {
+                "id": "dae",
+                "type": "module",
+                "compatibility": {
+                    "minimum": "12.0.12",
+                    "verified": "12.0.12"
+                }
+            }
+        ]
+    },
+    "esmodules": [
+        "scripts/procent-activities.js"
     ],
-    "requires": [
-      {
-        "id": "midi-qol",
-        "type": "module",
-        "compatibility": {
-          "minimum": "12.4.27",
-          "verified": "12.4.43"
+    "styles": [
+        "styles/procent-activities.css"
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
         }
-      },
-      {
-        "id": "dae",
-        "type": "module",
-        "compatibility": {
-          "minimum": "12.0.12",
-          "verified": "12.0.12"
-        }
-      }
-    ]
-  },
-  "esmodules": [
-    "scripts/procent-activities.js"
-  ],
-  "styles": [
-    "styles/procent-activities.css"
-  ],
-  "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "lang/en.json"
-    }
-  ],
-  "url": "https://github.com/TacticalOtaku/ProcentActivities",
-  "manifest": "https://raw.githubusercontent.com/TacticalOtaku/ProcentActivities/main/module.json",
-  "download": "http://github.com/TacticalOtaku/ProcentActivities/releases/download/v1.0.3/procent-activities-v1.0.2.zip"
+    ],
+    "url": "https://github.com/TacticalOtaku/ProcentActivities",
+    "manifest": "https://raw.githubusercontent.com/TacticalOtaku/ProcentActivities/main/module.json",
+    "download": "http://github.com/TacticalOtaku/ProcentActivities/releases/download/v1.0.5/procent-activities-v1.0.5.zip"
 }
