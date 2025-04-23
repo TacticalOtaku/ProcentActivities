@@ -49,5 +49,7 @@
       "name": "English",
       "path": "lang/en.json"
     }
-  ]
+  ],
+  "url": "https://github.com/TacticalOtaku/ProcentActivities",
+  "manifest": "https://github.com/TacticalOtaku/ProcentActivities/blob/main/module.json",
 }
