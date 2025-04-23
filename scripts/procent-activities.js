@@ -55,9 +55,9 @@ class ProcentActivitiesConfig extends FormApplication {
 
   async _renderInner(data) {
     const html = await super._renderInner(data);
-    const percentageInput = html.find('input[name="percentage"]');
+    const quantityInput = html.find('input[name="percentage"]');
     if (!data.allowOverlimit) {
-      percentageInput.attr("max", 100);
+      quantityInput.attr("max", 100);
     }
     return html;
   }
@@ -165,17 +165,24 @@ Hooks.on("renderItemSheet", (app, html, data) => {
     new ProcentActivitiesConfig(item).render(true);
   });
 
-  // Пытаемся найти заголовок листа предмета D&D 5e
+  // Пытаемся найти область рядом с полем количества
   const header = html.find(".sheet-header");
   if (header.length) {
     console.log(`ProcentActivities: Found .sheet-header for ${item.name}`);
-    const editButton = header.find(".header-button.control.edit");
-    if (editButton.length) {
-      console.log(`ProcentActivities: Found edit button, inserting after it`);
-      editButton.after(button);
+    const quantityField = header.find('input[name="system.quantity"]').closest(".item-detail");
+    if (quantityField.length) {
+      console.log(`ProcentActivities: Found quantity field, inserting button after it`);
+      quantityField.after(button);
     } else {
-      console.log(`ProcentActivities: Edit button not found, appending to .sheet-header`);
-      header.append(button);
+      console.warn(`ProcentActivities: Quantity field not found for ${item.name}, falling back to weight field`);
+      const weightField = header.find('input[name="system.weight"]').closest(".item-detail");
+      if (weightField.length) {
+        console.log(`ProcentActivities: Found weight field, inserting button after it`);
+        weightField.after(button);
+      } else {
+        console.warn(`ProcentActivities: Weight field not found for ${item.name}, appending to .sheet-header`);
+        header.append(button);
+      }
     }
   } else {
     console.warn(`ProcentActivities: Could not find .sheet-header for ${item.name}, falling back to .window-content`);
