@@ -1,0 +1,12 @@
+{
+  "PA.Title": "Percentage Activities Configuration",
+  "PA.HPBase": "HP Base",
+  "PA.CurrentHP": "Current HP",
+  "PA.MaxHP": "Maximum HP",
+  "PA.ActionType": "Action Type",
+  "PA.Damage": "Damage",
+  "PA.Healing": "Healing",
+  "PA.Percentage": "Percentage (%)",
+  "PA.AllowOverlimit": "Allow Overlimit",
+  "PA.Configure": "Percent Config"
+}
