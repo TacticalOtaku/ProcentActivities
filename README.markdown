@@ -30,14 +30,14 @@
 4. Click **Install**.
 5. Activate the module in your world under **Manage Modules**.
 
-Alternatively, download the ZIP file for version 1.0.15:
-- [Download v1.0.15](https://github.com/TacticalOtaku/ProcentActivities/releases/download/v1.0.15/procent-activities-v1.0.15.zip)
+Alternatively, download the ZIP file for version 1.0.16:
+- [Download v1.0.16](https://github.com/TacticalOtaku/ProcentActivities/releases/download/v1.0.16/procent-activities-v1.0.16.zip)
 
 ## Usage
 
 ### Configuring Percentage Effects
 1. Open an item sheet (e.g., weapon, spell, equipment, consumable, tool, loot, or feature) in **edit mode**.
-2. Look for the `%` button in the header (next to other control icons).
+2. Look for the `%` button in the tabs area (next to "Description", "Details", etc.).
 3. Click the `%` button to open the configuration form.
 4. Set the following options:
    - **HP Base**: Choose between "Current HP" or "Maximum HP".
@@ -62,7 +62,11 @@ Alternatively, download the ZIP file for version 1.0.15:
 
 ## Changelog
 
-- **v1.0.15 (2025-04-23)**:
+- **v1.0.16 (2025-04-23)**:
+  - Fixed persistent "onclick undefined" error by replacing `<a>` with `<button>`.
+  - Fixed button duplication by consolidating `renderItemSheet` hooks and ensuring button removal.
+  - Moved the `%` button to the `.tabs` area (next to "Description", "Details", etc.) and set its size to 20x20px.
+- **v1.0.15**:
   - Fixed error "Could not find .window-header" by improving DOM search logic.
   - Fixed error "onclick undefined" by switching to native `addEventListener` for button click handling.
 - **v1.0.14**:

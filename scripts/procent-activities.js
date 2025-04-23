@@ -139,6 +139,13 @@ Hooks.on("renderItemSheet", (app, html, data) => {
     return;
   }
 
+  // Удаляем старую кнопку, чтобы избежать дублирования
+  const existingButton = html.find(".procent-config-btn")[0];
+  if (existingButton) {
+    existingButton.remove();
+    console.log(`ProcentActivities: Removed existing button for item ${item.name}`);
+  }
+
   // Проверяем режим редактирования
   console.log(`ProcentActivities: Is sheet editable for ${item.name}? ${app.isEditable}`);
   if (!app.isEditable) {
@@ -155,17 +162,15 @@ Hooks.on("renderItemSheet", (app, html, data) => {
     return;
   }
 
-  // Удаляем старую кнопку, если она уже существует, чтобы избежать дублирования
-  html.find(".procent-config-btn").remove();
-
   // Создаём кнопку
-  const button = document.createElement("a");
-  button.className = "procent-config-btn header-button control";
+  const button = document.createElement("button");
+  button.className = "procent-config-btn";
   button.title = game.i18n.localize("PA.Title");
   button.innerHTML = '<i class="fas fa-percentage"></i>';
 
-  // Добавляем обработчик события через addEventListener
-  button.addEventListener("click", () => {
+  // Добавляем обработчик события
+  button.addEventListener("click", (event) => {
+    event.preventDefault(); // Предотвращаем стандартное поведение
     console.log(`ProcentActivities: Opening config for item ${item.name}`);
     try {
       new ProcentActivitiesConfig(item).render(true);
@@ -174,39 +179,17 @@ Hooks.on("renderItemSheet", (app, html, data) => {
     }
   });
 
-  // Пытаемся найти <div class="header-elements">
-  const headerElements = html.find(".header-elements")[0];
-  if (headerElements) {
-    console.log(`ProcentActivities: Found .header-elements for ${item.name}`);
-    // Вставляем кнопку перед последней иконкой (например, перед кнопкой закрытия)
-    const lastButton = headerElements.querySelector(".control:last-child");
-    if (lastButton) {
-      console.log(`ProcentActivities: Found last control button, inserting before it`);
-      headerElements.insertBefore(button, lastButton);
-    } else {
-      console.log(`ProcentActivities: No control buttons found in .header-elements, appending`);
-      headerElements.appendChild(button);
-    }
+  // Пытаемся найти элемент .tabs
+  const tabs = html.find(".tabs")[0];
+  if (tabs) {
+    console.log(`ProcentActivities: Found .tabs for ${item.name}`);
+    tabs.appendChild(button);
   } else {
-    console.warn(`ProcentActivities: Could not find .header-elements for ${item.name}, attempting to find .window-header`);
-    const windowHeader = html.closest(".app.window-app.sheet")[0]?.querySelector(".window-header");
-    if (windowHeader) {
-      console.log(`ProcentActivities: Found .window-header for ${item.name}`);
-      windowHeader.appendChild(button);
-    } else {
-      console.warn(`ProcentActivities: Could not find .window-header for ${item.name}, button not added. DOM structure:`, html[0].outerHTML);
-      return;
-    }
+    console.warn(`ProcentActivities: Could not find .tabs for ${item.name}, button not added. DOM structure:`, html[0].outerHTML);
+    return;
   }
-  console.log(`ProcentActivities: Added button for item ${item.name}`);
-});
 
-Hooks.on("renderItemSheet", (app, html, data) => {
-  // Удаляем кнопку, если лист не в режиме редактирования
-  if (!app.isEditable) {
-    html.find(".procent-config-btn").remove();
-    console.log(`ProcentActivities: Removed button for item ${data.item.name} as sheet is not editable`);
-  }
+  console.log(`ProcentActivities: Added button for item ${item.name}`);
 });
 
 Hooks.on("midi-qol.RollComplete", async (workflow) => {
