@@ -107,7 +107,6 @@ Hooks.once("init", () => {
       }
     };
 
-    // Регистрация настроек модуля
     game.settings.register("procent-activities", "accessRestriction", {
       name: game.i18n.localize("PA.Settings.AccessRestriction"),
       hint: game.i18n.localize("PA.Settings.AccessRestrictionHint"),
@@ -140,6 +139,7 @@ Hooks.on("renderItemSheet", (app, html, data) => {
   }
 
   // Проверяем режим редактирования
+  console.log(`ProcentActivities: Is sheet editable for ${item.name}? ${app.isEditable}`);
   if (!app.isEditable) {
     console.log(`ProcentActivities: Item sheet for ${item.name} is not editable, skipping button`);
     return;
@@ -148,6 +148,7 @@ Hooks.on("renderItemSheet", (app, html, data) => {
   // Проверяем настройки доступа
   const accessRestriction = game.settings.get("procent-activities", "accessRestriction");
   const isGM = game.user.isGM;
+  console.log(`ProcentActivities: Access restriction: ${accessRestriction}, Is GM: ${isGM}`);
   if (accessRestriction === "gmOnly" && !isGM) {
     console.log(`ProcentActivities: Access restricted to GM for ${item.name}, skipping button for non-GM user`);
     return;
@@ -164,17 +165,27 @@ Hooks.on("renderItemSheet", (app, html, data) => {
     new ProcentActivitiesConfig(item).render(true);
   });
 
-  const headerActions = html.find(".header-actions");
-  if (headerActions.length) {
-    headerActions.append(button);
-  } else {
-    console.warn(`ProcentActivities: Could not find .header-actions for item ${item.name}, falling back to .sheet-header`);
-    const sheetHeader = html.find(".sheet-header");
-    if (sheetHeader.length) {
-      sheetHeader.find(".header-button.control.edit").after(button);
+  // Пытаемся найти заголовок листа предмета D&D 5e
+  const header = html.find(".sheet-header");
+  if (header.length) {
+    console.log(`ProcentActivities: Found .sheet-header for ${item.name}`);
+    const editButton = header.find(".header-button.control.edit");
+    if (editButton.length) {
+      console.log(`ProcentActivities: Found edit button, inserting after it`);
+      editButton.after(button);
     } else {
-      console.warn(`ProcentActivities: Could not find .sheet-header for item ${item.name}`);
-      html.find(".item-sheet").prepend(button);
+      console.log(`ProcentActivities: Edit button not found, appending to .sheet-header`);
+      header.append(button);
+    }
+  } else {
+    console.warn(`ProcentActivities: Could not find .sheet-header for ${item.name}, falling back to .window-content`);
+    const windowContent = html.find(".window-content");
+    if (windowContent.length) {
+      console.log(`ProcentActivities: Appending to .window-content`);
+      windowContent.prepend(button);
+    } else {
+      console.error(`ProcentActivities: Could not find .window-content for ${item.name}, button not added`);
+      return;
     }
   }
   console.log(`ProcentActivities: Added button for item ${item.name}`);
@@ -250,7 +261,7 @@ Hooks.on("preCreateActiveEffect", (effect, data, options, userId) => {
       "flags.dae.macro": {
         name: "ProcentActivitiesEffect",
         content: `
-          const actor = this.actor; // Actor to which the effect is applied (target)
+          const actor = this.actor;
           const item = this.item;
           const flags = item.getFlag("procent-activities", "config");
           console.log("ProcentActivities: DAE macro executing for actor " + actor.name + ", item " + item.name, flags);
