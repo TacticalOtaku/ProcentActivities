@@ -89,8 +89,6 @@
   Ожидаемый вывод: `{ hpBase: "current", actionType: "damage", percentage: 75, allowOverlimit: false }`.
 - **Нет логов**: Откройте консоль браузера (F12) и проверьте сообщения `ProcentActivities`.
 
-## Контакты
-Если у вас есть вопросы или предложения, создайте issue в репозитории: [github.com/yourusername/procent-activities](https://github.com/yourusername/procent-activities).
 
 ## Лицензия
 MIT License. Модуль распространяется бесплатно для личного и коммерческого использования.
