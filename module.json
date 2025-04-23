@@ -2,7 +2,7 @@
     "id": "procent-activities",
     "title": "Procent Activities",
     "description": "A Foundry VTT module for applying percentage-based damage or healing, compatible with D&D 5e, Midi QOL, and Dynamic Active Effects. Adds a GUI for configuring percentage effects on items.",
-    "version": "1.0.10",
+    "version": "1.0.11",
     "compatibility": {
         "minimum": "12",
         "verified": "12.331"
@@ -52,5 +52,5 @@
     ],
     "url": "https://github.com/TacticalOtaku/ProcentActivities",
     "manifest": "https://raw.githubusercontent.com/TacticalOtaku/ProcentActivities/main/module.json",
-    "download": "https://github.com/TacticalOtaku/ProcentActivities/releases/download/v1.0.10/procent-activities-v1.0.10.zip"
+    "download": "https://github.com/TacticalOtaku/ProcentActivities/releases/download/v1.0.11/procent-activities-v1.0.11.zip"
 }
