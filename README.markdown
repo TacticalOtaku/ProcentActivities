@@ -30,8 +30,8 @@
 4. Click **Install**.
 5. Activate the module in your world under **Manage Modules**.
 
-Alternatively, download the ZIP file for version 1.0.14:
-- [Download v1.0.14](https://github.com/TacticalOtaku/ProcentActivities/releases/download/v1.0.14/procent-activities-v1.0.14.zip)
+Alternatively, download the ZIP file for version 1.0.15:
+- [Download v1.0.15](https://github.com/TacticalOtaku/ProcentActivities/releases/download/v1.0.15/procent-activities-v1.0.15.zip)
 
 ## Usage
 
@@ -62,7 +62,10 @@ Alternatively, download the ZIP file for version 1.0.14:
 
 ## Changelog
 
-- **v1.0.14 (2025-04-23)**:
+- **v1.0.15 (2025-04-23)**:
+  - Fixed error "Could not find .window-header" by improving DOM search logic.
+  - Fixed error "onclick undefined" by switching to native `addEventListener` for button click handling.
+- **v1.0.14**:
   - Restricted access to the `Access Restriction` setting in `Configure Settings` to GMs only.
 - **v1.0.13**:
   - Moved the `%` button to `<div class="header-elements">` in the item sheet header.
