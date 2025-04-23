@@ -51,6 +51,6 @@
     }
   ],
   "url": "https://github.com/TacticalOtaku/ProcentActivities",
-  "manifest": "https://github.com/TacticalOtaku/ProcentActivities/blob/main/module.json",
+  "manifest": "https://github.com/TacticalOtaku/ProcentActivities/main/module.json",
   "download": "http://github.com/TacticalOtaku/ProcentActivities/releases/download/v1.0.3/procent-activities-v1.0.2.zip"
 }
