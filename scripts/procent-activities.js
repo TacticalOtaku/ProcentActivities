@@ -118,6 +118,7 @@ Hooks.once("init", () => {
         "allPlayers": game.i18n.localize("PA.Settings.AllPlayers")
       },
       default: "gmOnly",
+      restricted: true, // Ограничение доступа только для GM
       onChange: value => {
         console.log(`ProcentActivities: Access restriction changed to ${value}`);
       }
@@ -165,33 +166,27 @@ Hooks.on("renderItemSheet", (app, html, data) => {
     new ProcentActivitiesConfig(item).render(true);
   });
 
-  // Пытаемся найти область рядом с полем количества
-  const header = html.find(".sheet-header");
-  if (header.length) {
-    console.log(`ProcentActivities: Found .sheet-header for ${item.name}`);
-    const quantityField = header.find('input[name="system.quantity"]').closest(".item-detail");
-    if (quantityField.length) {
-      console.log(`ProcentActivities: Found quantity field, inserting button after it`);
-      quantityField.after(button);
+  // Пытаемся найти <div class="header-elements">
+  const headerElements = html.find(".header-elements");
+  if (headerElements.length) {
+    console.log(`ProcentActivities: Found .header-elements for ${item.name}`);
+    // Вставляем кнопку перед последней иконкой (например, перед кнопкой закрытия)
+    const lastButton = headerElements.find(".control").last();
+    if (lastButton.length) {
+      console.log(`ProcentActivities: Found last control button, inserting before it`);
+      lastButton.before(button);
     } else {
-      console.warn(`ProcentActivities: Quantity field not found for ${item.name}, falling back to weight field`);
-      const weightField = header.find('input[name="system.weight"]').closest(".item-detail");
-      if (weightField.length) {
-        console.log(`ProcentActivities: Found weight field, inserting button after it`);
-        weightField.after(button);
-      } else {
-        console.warn(`ProcentActivities: Weight field not found for ${item.name}, appending to .sheet-header`);
-        header.append(button);
-      }
+      console.log(`ProcentActivities: No control buttons found in .header-elements, appending`);
+      headerElements.append(button);
     }
   } else {
-    console.warn(`ProcentActivities: Could not find .sheet-header for ${item.name}, falling back to .window-content`);
-    const windowContent = html.find(".window-content");
-    if (windowContent.length) {
-      console.log(`ProcentActivities: Appending to .window-content`);
-      windowContent.prepend(button);
+    console.warn(`ProcentActivities: Could not find .header-elements for ${item.name}, falling back to .window-header`);
+    const windowHeader = html.find(".window-header");
+    if (windowHeader.length) {
+      console.log(`ProcentActivities: Appending to .window-header`);
+      windowHeader.append(button);
     } else {
-      console.error(`ProcentActivities: Could not find .window-content for ${item.name}, button not added`);
+      console.error(`ProcentActivities: Could not find .window-header for ${item.name}, button not added`);
       return;
     }
   }

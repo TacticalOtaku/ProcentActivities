@@ -94,24 +94,23 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 20px; /* Размер для области */
-  height: 20px;
+  width: 16px; /* Уменьшенный размер */
+  height: 16px;
   margin: 0 2px;
   padding: 0;
-  background: #b0b0b0; /* Серый фон */
+  background: transparent; /* Прозрачный фон, как у других иконок */
   border: none;
-  border-radius: 5px; /* Закруглённые углы */
-  color: #000000; /* Чёрный символ */
-  font-size: 14px; /* Размер иконки */
+  color: #c9c7b8; /* Светло-серый цвет, как у других иконок */
+  font-size: 12px; /* Размер иконки, как у других */
   line-height: 1;
   cursor: pointer;
   visibility: visible;
   opacity: 1;
-  transition: background 0.2s;
+  transition: color 0.2s;
 }
 
 .procent-config-btn.header-button.control:hover {
-  background: #d32f2f; /* Светло-красный акцент при наведении */
+  color: #b11226; /* Красный акцент при наведении, как у других иконок */
 }
 
 .procent-config-btn.header-button.control i {
