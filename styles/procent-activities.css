@@ -1,6 +1,6 @@
 /* Стили для формы конфигурации ProcentActivities */
 #procent-activities-config {
-  background: #f4f0e9 url("ui/parchment.jpg") repeat; /* Пергаментный фон */
+  background: #f4f0e9 url("ui/parchment.jpg") repeat;
   border: 2px solid #7a7971;
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
@@ -94,21 +94,23 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 20px; /* Уменьшенный размер */
+  height: 20px;
   margin: 0 2px;
   padding: 0;
   background: transparent;
   border: none;
-  color: #191813;
-  font-size: 14px;
+  color: #4b4a44; /* Контрастный цвет, как у других иконок D&D 5e */
+  font-size: 12px; /* Уменьшенный размер иконки */
   line-height: 1;
   cursor: pointer;
+  visibility: visible; /* Всегда видимая */
+  opacity: 1; /* Полная непрозрачность */
   transition: color 0.2s, background 0.2s;
 }
 
 .procent-config-btn.header-button.control:hover {
-  color: #b11226;
+  color: #b11226; /* Красный акцент при наведении */
   background: rgba(177, 18, 38, 0.1);
   border-radius: 3px;
 }

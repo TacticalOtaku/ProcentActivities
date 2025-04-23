@@ -191,6 +191,14 @@ Hooks.on("renderItemSheet", (app, html, data) => {
   console.log(`ProcentActivities: Added button for item ${item.name}`);
 });
 
+Hooks.on("renderItemSheet", (app, html, data) => {
+  // Удаляем кнопку, если лист не в режиме редактирования
+  if (!app.isEditable) {
+    html.find(".procent-config-btn").remove();
+    console.log(`ProcentActivities: Removed button for item ${data.item.name} as sheet is not editable`);
+  }
+});
+
 Hooks.on("midi-qol.RollComplete", async (workflow) => {
   console.log(`ProcentActivities: midi-qol.RollComplete triggered for item ${workflow.item.name}`);
   try {
