@@ -1,11 +1,11 @@
 /* Стили для формы конфигурации ProcentActivities */
 #procent-activities-config {
-  background: #f4f0e9 url("ui/parchment.jpg") repeat; /* Пергаментный фон, как в D&D 5e */
-  border: 2px solid #7a7971; /* Тёмная рамка */
+  background: #f4f0e9 url("ui/parchment.jpg") repeat; /* Пергаментный фон */
+  border: 2px solid #7a7971;
   border-radius: 5px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Тень для глубины */
-  font-family: "Modesto Condensed", "Palatino Linotype", serif; /* Шрифт D&D 5e */
-  color: #191813; /* Тёмный текст */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  color: #191813;
   padding: 10px;
 }
 
@@ -32,7 +32,7 @@
 #procent-activities-config select,
 #procent-activities-config input[type="number"] {
   flex: 1;
-  background: #fffef7; /* Лёгкий пергаментный фон для полей */
+  background: #fffef7;
   border: 1px solid #7a7971;
   border-radius: 3px;
   padding: 5px;
@@ -44,7 +44,7 @@
 
 #procent-activities-config select:focus,
 #procent-activities-config input[type="number"]:focus {
-  border-color: #b11226; /* Красный акцент при фокусе */
+  border-color: #b11226;
   outline: none;
 }
 
@@ -53,7 +53,7 @@
   width: 16px;
   height: 16px;
   margin: 0;
-  accent-color: #b11226; /* Красный акцент для чекбокса */
+  accent-color: #b11226;
 }
 
 #procent-activities-config .form-group.stacked label {
@@ -69,8 +69,8 @@
 }
 
 #procent-activities-config .sheet-footer button {
-  background: #b11226; /* Красный фон, как в D&D 5e */
-  color: #fffef7; /* Светлый текст */
+  background: #b11226;
+  color: #fffef7;
   border: 1px solid #7a7971;
   border-radius: 3px;
   padding: 5px 10px;
@@ -81,7 +81,7 @@
 }
 
 #procent-activities-config .sheet-footer button:hover {
-  background: #8b0d1e; /* Тёмно-красный при наведении */
+  background: #8b0d1e;
   color: #fff;
 }
 
@@ -100,7 +100,7 @@
   padding: 0;
   background: transparent;
   border: none;
-  color: #191813; /* Тёмный цвет иконки */
+  color: #191813;
   font-size: 14px;
   line-height: 1;
   cursor: pointer;
@@ -108,11 +108,45 @@
 }
 
 .procent-config-btn.header-button.control:hover {
-  color: #b11226; /* Красный акцент при наведении */
-  background: rgba(177, 18, 38, 0.1); /* Лёгкий фон */
+  color: #b11226;
+  background: rgba(177, 18, 38, 0.1);
   border-radius: 3px;
 }
 
 .procent-config-btn.header-button.control i {
   margin: 0;
+}
+
+/* Стили для формы настроек в Configure Settings */
+#settings game .procent-activities-settings .form-group {
+  background: #f4f0e9 url("ui/parchment.jpg") repeat;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  padding: 10px;
+  margin: 10px 0;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  color: #191813;
+}
+
+#settings game .procent-activities-settings .form-group label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #191813;
+  margin-right: 10px;
+}
+
+#settings game .procent-activities-settings .form-group select {
+  background: #fffef7;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  padding: 5px;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 16px;
+  color: #191813;
+  flex: 1;
+}
+
+#settings game .procent-activities-settings .form-group select:focus {
+  border-color: #b11226;
+  outline: none;
 }

@@ -98,8 +98,32 @@ Hooks.once("init", () => {
       Healing: "Healing",
       Percentage: "Percentage (%)",
       AllowOverlimit: "Allow Overlimit",
-      Configure: "Percent Config"
+      Configure: "Percent Config",
+      Settings: {
+        AccessRestriction: "Access Restriction",
+        AccessRestrictionHint: "Control who can configure percentage effects on items.",
+        GMOnly: "Game Master Only",
+        AllPlayers: "All Players"
+      }
     };
+
+    // Регистрация настроек модуля
+    game.settings.register("procent-activities", "accessRestriction", {
+      name: game.i18n.localize("PA.Settings.AccessRestriction"),
+      hint: game.i18n.localize("PA.Settings.AccessRestrictionHint"),
+      scope: "world",
+      config: true,
+      type: String,
+      choices: {
+        "gmOnly": game.i18n.localize("PA.Settings.GMOnly"),
+        "allPlayers": game.i18n.localize("PA.Settings.AllPlayers")
+      },
+      default: "gmOnly",
+      onChange: value => {
+        console.log(`ProcentActivities: Access restriction changed to ${value}`);
+      }
+    });
+
     console.log("ProcentActivities: Module initialized successfully");
   } catch (e) {
     console.error("ProcentActivities: Error during initialization:", e);
@@ -115,9 +139,23 @@ Hooks.on("renderItemSheet", (app, html, data) => {
     return;
   }
 
+  // Проверяем режим редактирования
+  if (!app.isEditable) {
+    console.log(`ProcentActivities: Item sheet for ${item.name} is not editable, skipping button`);
+    return;
+  }
+
+  // Проверяем настройки доступа
+  const accessRestriction = game.settings.get("procent-activities", "accessRestriction");
+  const isGM = game.user.isGM;
+  if (accessRestriction === "gmOnly" && !isGM) {
+    console.log(`ProcentActivities: Access restricted to GM for ${item.name}, skipping button for non-GM user`);
+    return;
+  }
+
   const button = $(`
-    <a class="procent-config-btn" title="${game.i18n.localize("PA.Title")}">
-      <i class="fas fa-percentage"></i> ${game.i18n.localize("PA.Configure")}
+    <a class="procent-config-btn header-button control" title="${game.i18n.localize("PA.Title")}">
+      <i class="fas fa-percentage"></i>
     </a>
   `);
 
@@ -126,13 +164,19 @@ Hooks.on("renderItemSheet", (app, html, data) => {
     new ProcentActivitiesConfig(item).render(true);
   });
 
-  let targetContainer = html.find(".sheet-header");
-  if (!targetContainer.length) {
-    console.warn(`ProcentActivities: Could not find .sheet-header for item ${item.name}`);
-    targetContainer = html.find(".item-sheet");
+  const headerActions = html.find(".header-actions");
+  if (headerActions.length) {
+    headerActions.append(button);
+  } else {
+    console.warn(`ProcentActivities: Could not find .header-actions for item ${item.name}, falling back to .sheet-header`);
+    const sheetHeader = html.find(".sheet-header");
+    if (sheetHeader.length) {
+      sheetHeader.find(".header-button.control.edit").after(button);
+    } else {
+      console.warn(`ProcentActivities: Could not find .sheet-header for item ${item.name}`);
+      html.find(".item-sheet").prepend(button);
+    }
   }
-
-  targetContainer.prepend(button);
   console.log(`ProcentActivities: Added button for item ${item.name}`);
 });
 

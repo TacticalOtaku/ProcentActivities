@@ -1,12 +1,20 @@
 {
-  "PA.Title": "Percentage Activities Configuration",
-  "PA.HPBase": "HP Base",
-  "PA.CurrentHP": "Current HP",
-  "PA.MaxHP": "Maximum HP",
-  "PA.ActionType": "Action Type",
-  "PA.Damage": "Damage",
-  "PA.Healing": "Healing",
-  "PA.Percentage": "Percentage (%)",
-  "PA.AllowOverlimit": "Allow Overlimit",
-  "PA.Configure": "Percent Config"
+  "PA": {
+    "Title": "Percentage Activities Configuration",
+    "HPBase": "HP Base",
+    "CurrentHP": "Current HP",
+    "MaxHP": "Maximum HP",
+    "ActionType": "Action Type",
+    "Damage": "Damage",
+    "Healing": "Healing",
+    "Percentage": "Percentage (%)",
+    "AllowOverlimit": "Allow Overlimit",
+    "Configure": "Percent Config",
+    "Settings": {
+      "AccessRestriction": "Access Restriction",
+      "AccessRestrictionHint": "Control who can configure percentage effects on items.",
+      "GMOnly": "Game Master Only",
+      "AllPlayers": "All Players"
+    }
+  }
 }
